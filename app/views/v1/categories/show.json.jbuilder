@@ -1,5 +1,5 @@
 # # json.extract! @category, :name, :created_at
-json.(@category, :id, :name, :updated_at)
+json.(@category, :id, :name,:status, :updated_at)
 # json.merge! @category.attributes
 # json.set! :author do
 #   json.set! :name, 'David'

@@ -1,6 +1,6 @@
 class Api::V1::CategoriesController < ApplicationController
 
-  before_action :get_category, only: [:show]
+  before_action :get_category, only: [:show, :update]
 
   def index
     @categories = Category.all
@@ -13,10 +13,20 @@ class Api::V1::CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    p !!@category.status
     if @category.valid? && !!@category.status
       @category.save
       render :'v1/categories/create', status: :created
+    else
+      render :json => { error: @category.errors.full_messages }
+    end
+  end
+
+  def update
+    if @category.valid?
+      if category_params.present?
+        @category.update(category_params)
+        render :'v1/categories/show', status: :accepted
+      end
     else
       render :json => { error: @category.errors.full_messages }
     end
@@ -30,7 +40,6 @@ class Api::V1::CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name, :status)
-
   end
 
 end

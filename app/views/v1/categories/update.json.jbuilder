@@ -1,0 +1,1 @@
+json.(@category, :id, :name,:status, :updated_at)
