@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   private
 
   def not_found(e)
-    render json: { error: e, status: :unprocessable_entity }, status: :unprocessable_entity
+    render json: { error: e, status: :not_found }, status: :not_found
   end
 
   def param_missing(e)
