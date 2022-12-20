@@ -4,7 +4,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    render :'v1/categories/index', status: :created
+    render :'v1/categories/index', status: :found
   end
 
   def show
