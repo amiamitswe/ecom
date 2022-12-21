@@ -14,11 +14,15 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.valid?
-      @user.save
+    if @user.valid? && @user.save
+      # @user.status 200
       render 'v1/users/create', status: :created
+
     else
-      render :json => {error: @user.errors.full_messages}
+      # render :json => {error: @user.errors.full_messages}
+      @user.errors.full_messages
+      # @users.status 403
+      render 'v1/users/create', status: :forbidden
     end
   end
 
