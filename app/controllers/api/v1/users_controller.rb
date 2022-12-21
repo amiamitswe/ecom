@@ -1,6 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
   before_action :get_user, only: [:show]
+
   def index
     @users = User.all
     @users.count
@@ -11,9 +12,38 @@ class Api::V1::UsersController < ApplicationController
     render 'v1/users/show', status: :found
   end
 
+  # def create
+  #   @category = Category.new(category_params)
+  #   if @category.valid? && !!@category.status
+  #     @category.save
+  #     render :'v1/categories/create', status: :created
+  #   else
+  #     render :json => { error: @category.errors.full_messages }
+  #   end
+  # end
+  def create
+    @user = User.new(user_params)
+    if @user.valid?
+      @user.save
+      render 'v1/users/create', status: :created
+    else
+      render :json => {error: @user.errors.full_messages}
+    end
+  end
+
   private
+
   def get_user
     @user = User.find(params[:id])
+  end
+
+  # t.string "username"
+  # t.string "email"
+  # t.string "phone"
+  # t.string "role"
+  # t.string "password_digest"
+  def user_params
+    params.require(:user).permit(:username, :email, :phone, :role, :password)
   end
 
 end

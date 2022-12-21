@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_084114) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_21_124354) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_084114) do
     t.string "username"
     t.string "email"
     t.string "phone"
-    t.string "role"
+    t.string "role", default: "user"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
