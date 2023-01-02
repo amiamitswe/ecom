@@ -38,7 +38,11 @@ class Api::V1::UsersController < ApplicationController
     else
       render :json => { error: @user.errors.full_messages }
     end
+  end
 
+  def userCategory
+    @user = User.find(params[:user_id])
+    render 'v1/users/userCategory', status: :found
   end
 
   private
@@ -50,6 +54,5 @@ class Api::V1::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :phone, :role, :password)
   end
-
 
 end

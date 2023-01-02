@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1, defaults: {format: :json} do
       resources :categories
-      resources :users
+      resources :users do
+        get "/category", to: "users#userCategory"
+      end
     end
   end
 end

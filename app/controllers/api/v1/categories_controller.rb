@@ -13,7 +13,9 @@ class Api::V1::CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    @category.user_id = "1"
     if @category.valid? && !!@category.status
+
       @category.save
       render :'v1/categories/create', status: :created
     else
