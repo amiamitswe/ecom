@@ -32,6 +32,8 @@ class Api::V1::CategoriesController < ApplicationController
     end
   end
 
+
+
   private
 
   def get_category

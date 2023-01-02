@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
-  before_action :get_user, only: [:show]
+  before_action :get_user, only: [:show, :update]
 
   def index
     @users = User.all
@@ -26,6 +26,21 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update
+    if @user.present?
+      if user_params.present?
+        if @user.update(user_params)
+          render 'v1/users/create', status: :accepted
+        else
+          render :json => { error: @user.errors.full_messages }
+        end
+      end
+    else
+      render :json => { error: @user.errors.full_messages }
+    end
+
+  end
+
   private
 
   def get_user
@@ -35,5 +50,6 @@ class Api::V1::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :phone, :role, :password)
   end
+
 
 end

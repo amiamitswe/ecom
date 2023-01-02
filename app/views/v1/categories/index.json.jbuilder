@@ -3,6 +3,7 @@ json.data do
     json.array! @categories do |category|
       json.id category.id
       json.name category.name
+      json.status category.status
       json.create category.created_at
       json.update category.updated_at
 
